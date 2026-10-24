@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f6f0e5" />
+  <meta name="description" content="山河浮生 — เกมจำลองชีวิตในจีนโบราณ สุ่มชะตาและเฝ้ามองชีวิตหนึ่งชีวิตไหลผ่านกาลเวลา" />
+  <title>山河浮生 — ชะตาใต้หล้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="paper-grain" aria-hidden="true"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="山河浮生 หน้าหลัก">
+        <span class="brand-seal">山<br>河</span>
+        <span><strong>山河浮生</strong><small>ชะตาหนึ่งใต้หล้า</small></span>
+      </a>
+      <div class="top-actions">
+        <button class="icon-btn" id="musicBtn" aria-label="เปิดหรือปิดเสียงดนตรี" title="เสียงดนตรี">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13M9 18c0 1.7-1.6 3-3.5 3S2 20 2 18.5 3.6 16 5.5 16 9 16.5 9 18Zm12-2c0 1.7-1.6 3-3.5 3S14 18 14 16.5s1.6-2.5 3.5-2.5S21 14.5 21 16Z"/></svg>
+        </button>
+        <button class="icon-btn" id="archiveBtn" aria-label="บันทึกชาติก่อน" title="บันทึกชาติก่อน">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v4H4zM6 8v12h12V8M9 12h6M9 15h6"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="screen start-screen" id="startScreen">
+      <div class="hero-art">
+        <img src="assets/ancient-river-town.png" alt="ภาพวาดเมืองจีนโบราณริมสายน้ำและภูเขาหมอก" />
+        <div class="hero-shade"></div>
+        <div class="hero-copy">
+          <span class="eyebrow">浮生若梦 · ชีวิตดุจความฝัน</span>
+          <h1>山河浮生</h1>
+          <p>หนึ่งชีวิต · หมื่นชะตา</p>
+        </div>
+        <span class="vertical-stamp" aria-hidden="true">一生一世</span>
+      </div>
+
+      <div class="intro-copy">
+        <p class="section-kicker">บันทึกแห่งกาลเวลา</p>
+        <h2>หากได้เกิดในแผ่นดินมังกร<br>ชีวิตของเจ้าจะเป็นเช่นไร</h2>
+        <p class="muted">เจ้ามิอาจเลือกจุดเริ่มต้นได้ แต่ทุกปีที่ผ่านไปจะค่อย ๆ หล่อหลอมชะตาของเจ้า</p>
+      </div>
+
+      <div class="setup-card">
+        <div class="field-row">
+          <label for="eraSelect">ยุคสมัย</label>
+          <span class="field-hint">เลือกเองหรือให้ชะตานำทาง</span>
+        </div>
+        <select id="eraSelect" class="select-field">
+          <option value="random">สุ่มราชวงศ์ให้ข้า</option>
+          <option value="han">ปลายราชวงศ์ฮั่น · 汉末</option>
+          <option value="tang">ราชวงศ์ถัง · 大唐</option>
+          <option value="song">ราชวงศ์ซ่ง · 两宋</option>
+          <option value="ming">ราชวงศ์หมิง · 大明</option>
+        </select>
+        <div class="setting-note">
+          <span class="note-icon" aria-hidden="true">卦</span>
+          <p>ชื่อ เพศ บ้านเกิด ฐานะ สุขภาพ และชาติกำเนิดจะถูกสุ่มขึ้นใหม่ในแต่ละชีวิต</p>
+        </div>
+        <button class="primary-btn" id="birthBtn">
+          <span>เริ่มต้นชีวิตใหม่</span><span class="button-arrow" aria-hidden="true">→</span>
+        </button>
+        <div class="setup-foot"><span class="tiny-seal">生</span><span>ไม่มีชีวิตใดเหมือนกัน และไม่มีชีวิตใดอยู่ชั่วนิรันดร์</span></div>
+      </div>
+      <div class="start-footer"><span>山河万里 · 人间一程</span><span>เวอร์ชันต้นแบบ 0.1</span></div>
+    </section>
+
+    <section class="screen life-screen hidden" id="lifeScreen">
+      <div class="life-hero">
+        <img src="assets/ancient-river-town.png" alt="เมืองโบราณที่ชีวิตของตัวละครดำเนินอยู่" />
+        <div class="life-hero-tint"></div>
+        <div class="life-hero-top"><span class="era-pill" id="eraPill">大唐</span><span class="running-indicator"><span class="live-dot"></span><span id="runStateText">กาลเวลากำลังไหล</span></span></div>
+        <div class="life-hero-bottom">
+          <div class="year-label" id="yearLabel">รัชศกไคหยวน · ปีที่ 1</div>
+          <div class="age-display"><strong id="ageNum">0</strong><span>ปี</span><span class="age-stage" id="ageStage">แรกเกิด</span></div>
+          <div class="progress-track"><span id="lifeProgress"></span></div>
+        </div>
+      </div>
+
+      <div class="life-heading">
+        <div class="name-block">
+          <div class="name-line"><h1 id="characterName">沈知微</h1><span class="gender-tag" id="genderTag">หญิง</span></div>
+          <p id="characterSub">เสิ่นจือเวย · เกิดในครอบครัวชาวบ้าน</p>
+        </div>
+        <button class="text-btn" id="revealBtn">ชาติกำเนิด <span aria-hidden="true">⌄</span></button>
+      </div>
+      <div class="origin-detail hidden" id="originDetail"></div>
+
+      <div class="profile-strip">
+        <div><span class="profile-label">ฐานะ</span><strong id="classValue">ครอบครัวชาวนา</strong></div>
+        <div><span class="profile-label">ยศ / สถานะ</span><strong id="rankValue">สามัญชน</strong></div>
+        <div><span class="profile-label">ถิ่นกำเนิด</span><strong id="birthplaceValue">เจียงหนาน</strong></div>
+      </div>
+
+      <div class="stats-card">
+        <div class="card-title-row"><h2>ชีพจรแห่งชีวิต</h2><span class="card-caption">ปรับเปลี่ยนตามการเลือก</span></div>
+        <div class="stat-item"><div class="stat-head"><span>สุขภาพ</span><strong id="healthValue">82</strong></div><div class="stat-bar"><span id="healthBar" class="health-fill"></span></div></div>
+        <div class="stat-item"><div class="stat-head"><span>ความรู้</span><strong id="knowledgeValue">8</strong></div><div class="stat-bar"><span id="knowledgeBar" class="knowledge-fill"></span></div></div>
+        <div class="stat-item"><div class="stat-head"><span>ชื่อเสียง</span><strong id="fameValue">5</strong></div><div class="stat-bar"><span id="fameBar" class="fame-fill"></span></div></div>
+        <div class="stat-bottom"><span>ทรัพย์สิน <strong id="wealthValue">12</strong> ตำลึง</span><span>สายสัมพันธ์ <strong id="bondValue">38</strong></span></div>
+      </div>
+
+      <div class="control-card">
+        <div class="card-title-row"><h2>จังหวะกาลเวลา</h2><button class="auto-toggle active" id="autoBtn" aria-pressed="true"><span class="toggle-dot"></span> ชะตาอัตโนมัติ</button></div>
+        <div class="time-controls">
+          <button id="pauseBtn" class="control-button"><span class="pause-symbol" aria-hidden="true">Ⅱ</span><span id="pauseLabel">หยุดเวลา</span></button>
+          <div class="speed-group" aria-label="ความเร็วของเวลา"><button class="speed-btn active" data-speed="1">1×</button><button class="speed-btn" data-speed="2">2×</button><button class="speed-btn" data-speed="4">4×</button></div>
+        </div>
+        <p class="control-hint" id="controlHint">หนึ่งปีค่อย ๆ ผ่านไปในความเงียบงัน สามารถหยุดเวลาเพื่ออ่านบันทึกหรือเลือกเส้นทางได้</p>
+      </div>
+
+      <div class="actions-section">
+        <div class="section-heading"><div><p class="section-kicker">เลือกวิถี</p><h2>ปีนี้ เจ้าจะทำสิ่งใด</h2></div><span class="action-year" id="actionYear">年 · 01</span></div>
+        <div class="action-grid">
+          <button class="action-card" data-action="study"><span class="action-icon ink-icon">文</span><strong>ร่ำเรียน</strong><small>ความรู้เพิ่มขึ้น</small></button>
+          <button class="action-card" data-action="work"><span class="action-icon coin-icon">财</span><strong>ทำมาหากิน</strong><small>สะสมทรัพย์สิน</small></button>
+          <button class="action-card" data-action="social"><span class="action-icon bond-icon">缘</span><strong>พบปะผู้คน</strong><small>สร้างสายสัมพันธ์</small></button>
+          <button class="action-card" data-action="rest"><span class="action-icon heart-icon">养</span><strong>พักรักษากาย</strong><small>ดูแลสุขภาพ</small></button>
+          <button class="action-card" data-action="travel"><span class="action-icon travel-icon">行</span><strong>ออกเดินทาง</strong><small>เปิดโลกและโอกาส</small></button>
+          <button class="action-card" data-action="ambition"><span class="action-icon rank-icon">仕</span><strong>แสวงหาตำแหน่ง</strong><small>สอบหรือรับราชการ</small></button>
+        </div>
+        <p class="action-feedback" id="actionFeedback" aria-live="polite">การเลือกของเจ้าจะค่อย ๆ เปลี่ยนรูปร่างของชะตา</p>
+      </div>
+
+      <div class="chronicle-card">
+        <div class="card-title-row"><h2>บันทึกชีวิต</h2><span class="record-count" id="recordCount">0 รายการ</span></div>
+        <div class="chronicle-list" id="chronicleList"><div class="empty-record">เมื่อเรื่องราวเริ่มต้น บันทึกแรกจะปรากฏที่นี่</div></div>
+      </div>
+
+      <div class="life-end hidden" id="lifeEnd">
+        <div class="end-seal">终</div>
+        <p class="section-kicker">บันทึกหน้าสุดท้าย</p>
+        <h2 id="endTitle">ทุกชีวิตย่อมมีปลายทาง</h2>
+        <p id="endSummary"></p>
+        <div class="end-stats" id="endStats"></div>
+        <button class="primary-btn" id="newLifeBtn"><span>ปล่อยชะตาใหม่ให้เริ่มต้น</span><span class="button-arrow" aria-hidden="true">→</span></button>
+      </div>
+
+      <footer class="life-footer"><button id="backToStartBtn" class="footer-link">เริ่มชีวิตใหม่</button><span>花开花落 · 山河依旧</span><button id="exportBtn" class="footer-link">ส่งออกบันทึก</button></footer>
+    </section>
+
+    <section class="archive-panel hidden" id="archivePanel" aria-labelledby="archiveTitle">
+      <div class="archive-header"><div><p class="section-kicker">岁月留痕</p><h2 id="archiveTitle">ชาติก่อน ๆ</h2></div><button class="icon-btn close-btn" id="closeArchiveBtn" aria-label="ปิดบันทึก"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <div id="archiveList" class="archive-list"></div>
+      <p class="archive-foot">บันทึกจะอยู่ในเบราว์เซอร์นี้เท่านั้น ไม่ได้ส่งออกไปยังเซิร์ฟเวอร์</p>
+    </section>
+
+    <div class="event-backdrop hidden" id="eventBackdrop" role="dialog" aria-modal="true" aria-labelledby="eventTitle">
+      <article class="event-modal">
+        <div class="event-ornament"><span></span><b>命</b><span></span></div>
+        <p class="section-kicker" id="eventKicker">เหตุการณ์แห่งชะตา</p>
+        <div class="event-age" id="eventAge">วัยเยาว์ · 7 ปี</div>
+        <h2 id="eventTitle">เสียงระฆังจากเมืองหลวง</h2>
+        <p class="event-description" id="eventDescription">ข่าวจากเมืองหลวงเดินทางมาถึงหมู่บ้าน</p>
+        <div class="event-choices" id="eventChoices"></div>
+        <div class="event-autonote" id="eventAutoNote">หากไม่เลือก ชะตาจะตัดสินใจแทนในอีก <strong id="autoCountdown">7</strong> วินาที</div>
+      </article>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
